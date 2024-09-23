@@ -23,7 +23,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
         String routeName;
         switch (index) {
           case 0:
-            routeName = '/';
+            routeName = '/homepage';
             break;
           case 1:
             routeName = '/designspage';

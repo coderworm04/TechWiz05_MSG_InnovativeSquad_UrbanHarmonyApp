@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:urban_harmony_app/consts/export-consts.dart';
+import 'package:urban_harmony_app/consts/fontstyles-consts.dart';
 
 class TabWithFiltersWidget extends StatefulWidget {
   @override
@@ -8,6 +8,16 @@ class TabWithFiltersWidget extends StatefulWidget {
 
 class _TabWithFiltersWidgetState extends State<TabWithFiltersWidget> with SingleTickerProviderStateMixin {
   TabController? _tabController;
+  String selectedCategory = 'All'; // Default selected category
+  final List<String> categories = [
+    'All',
+    'Furniture',
+    'Lighting',
+    'Decor',
+    'Rugs and Carpets',
+    'Wall Art',
+    'Curtains and Blinds'
+  ];
 
   @override
   void initState() {
@@ -30,103 +40,70 @@ class _TabWithFiltersWidgetState extends State<TabWithFiltersWidget> with Single
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(
-                  child: TabBar(
-                    dividerColor: Colors.transparent,
-                    controller: _tabController,
-                    labelColor: Colors.black,
-                    unselectedLabelColor: Colors.grey,
-                    labelStyle: TextStyle(
-                      fontSize: 16, // Adjusted font size for better visibility
-                      fontWeight: FontWeight.bold,
-                    ),
-                    indicator: UnderlineTabIndicator(
-                      borderSide: BorderSide(
-                        color: Colors.orange,
-                        width: 3.0, 
-                      ),
-                    ),
-                    tabs: [
-                      
-                      Tab(
-                        child: Text(
-                          'Explore',
-                          style: TextStyle(
-                            fontSize: 25, 
-                            fontWeight: FontWeight.w800,
-                            fontFamily: bold,
-                          ),
-                        ),
-                      ),
-                      Tab(
-                        child: Text(
-                          'Follow',
-                          style: TextStyle(
-                             fontSize: 20, 
-                            fontWeight: FontWeight.w800,
-                            fontFamily: bold,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+              Text(
+                "Explore",
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: bold,
                 ),
-
+              ),
               // Search Icon
               IconButton(
-                icon: Icon(Icons.search, color: Colors.black,),
-                onPressed: () {
-                },
+                icon: Icon(Icons.search, color: Colors.black),
+                onPressed: () {},
               ),
             ],
           ),
         ),
-        
-        // Filter Buttons below the TabBar
+
+        // Filter Icon with PopupMenuButton for categories
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              FilterButton(label: 'All', isSelected: true),
-              FilterButton(label: 'Tropical'),
-              FilterButton(label: 'Luxury'),
-              IconButton(
-                icon: Icon(Icons.filter_list, color: Colors.black),
-                onPressed: () {
+              Text(
+                "",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+              ),
+              PopupMenuButton<String>(
+                icon: Icon(Icons.filter_list, color: Colors.black), // Filter Icon
+                onSelected: (String selected) {
+                  setState(() {
+                    selectedCategory = selected;
+                  });
+                },
+                itemBuilder: (BuildContext context) {
+                  return categories.map<PopupMenuEntry<String>>((String value) {
+                    return PopupMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList();
                 },
               ),
             ],
           ),
         ),
+
+        // Display a Card based on the selected category
+        if (selectedCategory != 'All')
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Card(
+              elevation: 4,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  ' $selectedCategory',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                ),
+              ),
+            ),
+          ),
       ],
     );
   }
 }
-
-// Custom Filter Button widget
-class FilterButton extends StatelessWidget {
-  final String label;
-  final bool isSelected;
-
-  FilterButton({required this.label, this.isSelected = false});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      decoration: BoxDecoration(
-        color: isSelected ? Colors.black : Colors.grey[200],
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Text(
-        label,
-        style: TextStyle(
-          color: isSelected ? Colors.white : Colors.black,
-          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-        ),
-      ),
-    );
-  }
-}
-

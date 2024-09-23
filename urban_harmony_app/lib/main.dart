@@ -6,6 +6,8 @@ import 'package:urban_harmony_app/pages/bottomNavBar/designspage.dart';
 import 'package:urban_harmony_app/pages/bottomNavBar/notificationpage.dart';
 import 'package:urban_harmony_app/pages/bottomNavBar/profilepage.dart';
 import 'package:urban_harmony_app/pages/homepage.dart';
+import 'package:urban_harmony_app/pages/onboarding_screen.dart';
+import 'package:urban_harmony_app/pages/signinpage.dart';
 import 'package:urban_harmony_app/pages/splashscreen.dart';
 
 void main() {
@@ -21,7 +23,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        "/":(context) => HomePage(),
+        // "/":(context) => OnBoardingScreen(),
+        "/":(context) => SplashScreen(),
+        // "/":(context) => SigningPage(),
+        "/homepage":(context) => HomePage(),
         "/designspage":(context) => DesignsPage(),
         "/blogspage":(context) => BlogsPage(),
         "/notificationpage":(context) => NotificationPage(),

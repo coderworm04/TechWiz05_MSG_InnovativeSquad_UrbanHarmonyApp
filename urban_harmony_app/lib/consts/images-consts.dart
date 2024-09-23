@@ -5,4 +5,16 @@ const BurgerIcon = "assets/icons/burger_icon.svg";
 const SearchIcon2 = "assets/icons/search_icon.svg";
 const EarthIcon = "assets/icons/earth-svgrepo-com.svg";
 const BlogIcon = "assets/icons/blog-writing-svgrepo-com.svg";
+const ForwardIcon = "assets/icons/forward_icon.svg";
+const BackIcon = "assets/icons/back_icon.svg";
+const HeartIcon = "assets/icons/heart_icon.svg";
+const SharIcon = "assets/icons/share_icon.svg";
+const FacebookIcon = "assets/icons/facebook.svg";
+const InstagramIcon = "assets/icons/instagram.svg";
+const LinkedinIcon = "assets/icons/linkedin.svg";
 
+const DemoImage0 = "assets/images/image_1.png";
+const DemoImage1 = "assets/images/image_2.png";
+const DemoImage2 = "assets/images/image_3.png";
+const DemoImage3 = "assets/images/image_4.png";
+const DemoImage4 = "assets/images/image_5.png";
